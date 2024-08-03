@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Votante{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Editar Votante</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="nombres">Nombres</label>
+            <input type="text" class="form-control" id="nombres" name="nombres" value="{{ votante.nombres }}" required>
+        </div>
+        <div class="form-group">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos" name="apellidos" value="{{ votante.apellidos }}" required>
+        </div>
+        <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" value="{{ votante.direccion }}" required>
+        </div>
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" value="{{ votante.telefono }}" required>
+        </div>
+        <div class="form-group">
+            <label for="cedula">Cédula</label>
+            <input type="text" class="form-control" id="cedula" name="cedula" value="{{ votante.cedula }}" required>
+        </div>
+        <div class="form-group">
+            <label for="mesa">Mesa</label>
+            <input type="text" class="form-control" id="mesa" name="mesa" value="{{ votante.mesa }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{{ url_for('informacion.registrarVotantes') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

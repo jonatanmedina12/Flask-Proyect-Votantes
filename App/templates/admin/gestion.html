@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido a la Gestión de Comunas y Departamentos
+Utilice el menú para gestionar los municipios, comunas y barrios {% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gestion.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <h2>Bienvenido a la Gestión de Comunas y Departamentos
+        Utilice el menú para gestionar los municipios, comunas y barrios </h2>
+    <form id="profile-form" method="POST" >
+        <div class="form-row">
+            <div class="form-group">
+                <label for="Municipio"><i class="fa fa-user"></i> Municipio </label>
+                <input type="text" id="Municipio" name="Municipio"  required>
+            </div>
+            <div class="form-group">
+                <label for="Comuna"><i class="fa fa-user"></i>Comuna </label>
+                <input type="text" id="Comuna" name="Comuna"  required>
+            </div>
+            <div class="form-group">
+                <label for="Barrio"><i class="fa fa-envelope"></i> Barrio </label>
+                <input type="text" id="Barrio" name="Barrio"  required>
+            </div>
+        </div>
+        <div class="form-row">
+            <h3>Puesto de votación</h3>
+            <div class="form-group">
+                <label for="nombre_votacion"><i class="fa fa-user"></i> Nombre puesto de votación </label>
+                <input type="text" id="nombre_votacion" name="nombre_votacion"  required>
+            </div>
+             <div class="form-group">
+                <label for="direccion"><i class="fa fa-user"></i> Dirección </label>
+                <input type="text" id="direccion" name="direccion"  required>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn">Guardar Cambios</button>
+        </div>
+    </form>
+
+{% endblock %}

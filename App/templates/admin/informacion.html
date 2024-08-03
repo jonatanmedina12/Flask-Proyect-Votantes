@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Votantes{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/informacion.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Lista de Votantes Registrados</h2>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar votante...">
+        <button id="searchButton">Buscar</button>
+    </div>
+
+    <table class="votantes-table">
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Cédula</th>
+                <th>Mesa</th>
+                <th>Líder</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for votante in datos %}
+            <tr>
+                <td>{{ votante.nombres }}</td>
+                <td>{{ votante.apellidos }}</td>
+                <td>{{ votante.direccion }}</td>
+                <td>{{ votante.telefono }}</td>
+                <td>{{ votante.cedula }}</td>
+                <td>{{ votante.mesa }}</td>
+                <td>{{ lider.nombres if lider else 'N/A' }}</td>
+                <td>
+                   <a href="{{ url_for('informacion.editar_votante', id=votante.id) }}" class="btn btn-edit">Editar</a>
+                <form action="{{ url_for('informacion.eliminar_votante', id=votante.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este votante?');">Eliminar</button>
+                </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('searchButton').addEventListener('click', function() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.votantes-table tbody tr');
+
+    rows.forEach(function(row) {
+        var text = row.textContent.toLowerCase();
+        if(text.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+</script>
+{% endblock %}

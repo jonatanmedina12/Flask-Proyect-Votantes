@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  flask:
+    build:
+      context: .
+    command: python main.py
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "5001:5001"
+    depends_on:
+      - sqlserver
+    environment:
+      - SECRET_KEY=dev
+      - JWT_SECRET_KEY=dev
+      - DB_SERVER=sqlserver,1433
+      - DB_NAME=Sistema_votacion
+      - DB_USER=sa
+      - DB_PASSWORD=123456**
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_PORT=5001
+      - GOOGLE_MAPS_API_KEY=AIzaSyDRc_aocLCdwLlvgT3TbLRiiFLyRqo6PkM
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: pruebaTecnica
+    environment:
+      SA_PASSWORD: "123456**"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"

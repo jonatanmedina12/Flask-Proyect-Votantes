@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar Usuario{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register_user.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <h2>Registrar Usuario</h2>
+    <form method="post" enctype="multipart/form-data" >
+        <div class="form-group">
+                <label for="foto_perfil"><i class="fa fa-camera"></i> Foto de Perfil:</label>
+                <input type="file" id="foto_perfil" name="foto_perfil" required>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+          <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" required>
+        </div>
+        <div class="form-group">
+            <label for="celular">Celular:</label>
+            <input type="text" class="form-control" id="celular" name="celular" required>
+        </div>
+        <div class="form-group">
+            <label for="nacimiento"><i class="fa fa-calendar"></i> Fecha de Nacimiento:</label>
+            <input type="date" id="nacimiento" name="nacimiento" required>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group full-width">
+                <label for="direccion"><i class="fa fa-map-marker-alt"></i> Dirección:</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Calle, Ciudad, Estado, Código Postal" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Rol</label>
+            <select class="form-control" id="role" name="role" required>
+                {% for role in roles %}
+                <option value="{{role.nombre_rol}}">{{role.nombre_rol}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+    </form>
+</div>
+{% endblock %}
+

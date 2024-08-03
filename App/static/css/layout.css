@@ -1,0 +1,136 @@
+/* Estilos generales */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+padding: 20px 27px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon-container a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.icon-container a i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.icon-container a:hover {
+    color: #0056b3;
+}
+
+.container {
+    margin-top: 20px;
+
+}
+
+
+.left-section {
+    margin-left: auto;  /* Mueve la sección izquierda al final */
+    display: flex;
+    align-items: center;
+}
+.flash-messages {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Ajuste el ancho automático */
+    max-width: 90%; /* Limite el ancho máximo para pantallas pequeñas */
+    z-index: 1000;
+    text-align: center;
+}
+
+.flash {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box; /* Para incluir el padding y borde dentro del ancho */
+}
+
+.flash .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    line-height: 2px;
+    cursor: pointer;
+    color: #721c24;
+}
+
+.user-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+    position: relative;
+}
+
+.user-wrapper i {
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.user-wrapper .user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #007bff;
+    font-size: 18px;
+    font-weight: bold;
+}
+.user-wrapper .user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 9px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 17px;
+    top: 50px;
+    background: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1001;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background: #f1f1f1;
+}
+
+.dropdown-content.show {
+    display: block;
+}

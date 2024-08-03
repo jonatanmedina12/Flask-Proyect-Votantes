@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar Votante{% endblock %}
+
+ {% block head %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registrar.css') }}">
+
+{% endblock %}
+
+{%block user%}
+        <div class="user-wrapper">
+            <div class="user">
+                {% if user_foto_perfil is not none %}
+                <img src="{{ url_for('static', filename=user_foto_perfil) }}" alt="User" id="user-icon">
+                <a id="profile-text">Perfil</a>
+                {% else %}
+                <img src="{{ url_for('static', filename='images/messages-3.jpg') }}" alt="User" id="user-icon">
+                <a id="profile-text">Perfil</a>
+
+                {% endif %}
+                <div class="dropdown-content">
+                    <a href="{{ url_for('registrar.profile_admin') }}">Profile</a>
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% if rol==1 %}
+        <div class="left-section">
+                <div class="icon-container">
+                    <a href="{{ url_for('registrar.registrar_usuarios') }}"><i class="fa-solid fa-user-plus"></i>Registrar usuarios</a>
+                </div>
+        </div>
+        <div class="global-wrapper">
+                <i class="fa-solid fa-earth-americas"></i>
+                            <a id="gestion-text">Gestión</a>
+
+                <div class="dropdown-content-global">
+                    <a href="{{ url_for('registrar.gestion_municipio') }}">Municipios y comunas</a>
+                    <a href="{{ url_for('registrar.asignar') }}">Asignar Capitanes</a>
+                    <a href="{{ url_for('registrar.asignar_lideres') }}">Asignar Lideres</a>
+
+                </div>
+        </div>
+        {% endif %}
+            <div class="left-section-data">
+                    <div class="icon-container">
+                    <a href="{{ url_for('informacion.registrarVotantes') }}"><i class="fa-solid fa-database"></i>Ver datos almacenados</a>
+                    </div>
+            </div>
+{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h2>Registrar Votante</h2>
+
+    <form method="post" action="">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="cedula">Documento de Identidad</label>
+                <input type="text" class="form-control" id="cedula" name="cedula" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Telefono</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" required>
+            </div>
+        </div>
+        <div class="form-group direccion-group">
+
+            <label for="direccion">Dirección</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="direccion" name="direccion" required>
+                <button type="button" id="buscar-direccion" class="btn btn-secondary">Buscar</button>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="ciudad">Ciudad</label>
+                <input type="text" class="form-control readonly-input" id="ciudad" name="ciudad" readonly>
+            </div>
+            <div class="form-group">
+                <label for="departamento">Departamento</label>
+                <input type="text" class="form-control readonly-input" id="departamento" name="departamento" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="pais">País</label>
+                <input type="text" class="form-control readonly-input" id="pais" name="pais" readonly>
+            </div>
+            <div class="form-group">
+                <label for="barrio">Barrio</label>
+                <select class="form-control" id="barrio" name="barrio" required>
+                    <option value="" selected disabled>Seleccione un Barrio</option>
+
+                    {% for barrios in barrio %}
+                     <option value="{{barrios.id_barrio}}">{{barrios.nombre}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div>
+          <div class="form-row">
+                <div class="form-group">
+                <label for="puesto_votacion">Puesto de Votación</label>
+                    <select class="form-control" id="puesto_votacion" name="puesto_votacion" required>
+                    <option value="" selected disabled>Seleccione un Puesto de Votación</option>
+
+                    {% for puestos in puesto %}
+                     <option value="{{puestos.id_puesto}}">{{puestos.nombre}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        <div class="form-group">
+            <label for="Mesa_votacion">Mesa de Votación</label>
+            <input type="text" class="form-control" id="Mesa_votacion" name="Mesa_votacion" required>
+        </div>
+          </div>
+
+        <button type="submit" class="btn btn-primary">Registrar Votante</button>
+    </form>
+</div>
+{% block scripts %}
+<script>
+document.getElementById('buscar-direccion').addEventListener('click', function() {
+    var direccion = document.getElementById('direccion').value;
+    fetch('buscar_direccion?direccion=' + encodeURIComponent(direccion))
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('ciudad').value = data.city || '';
+                document.getElementById('departamento').value = data.department || '';
+                document.getElementById('pais').value = data.country || '';
+            } else {
+                alert('No se pudo encontrar la dirección');
+            }
+        });
+});
+</script>
+{% endblock %}
+{% endblock %}
