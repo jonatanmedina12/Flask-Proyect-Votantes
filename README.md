@@ -54,7 +54,7 @@ Sigue estos pasos para configurar el proyecto en tu máquina local:
        ```bash
       docker-compose up --build
 
-      4. Api's
+   4. Api's
          ```bash
          {
      "info": {
