@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido a los Gestion de capitanes
+        Utilice el menú para gestionar y asignar{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/asignar.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <h2>Bienvenido a los Gestion de capitanes
+        Utilice el menú para gestionar y asignar </h2>
+    <form id="profile-form" method="POST" >
+        <div class="form-row">
+            <h2>Información de capitanes</h2>
+            <div class="form-group">
+                <label for="Nombre"><i class="fa fa-user"></i> Nombre </label>
+                <input type="text" id="Nombre" name="Nombre"  required>
+            </div>
+            <div class="form-group">
+                <label for="Apellido"><i class="fa fa-user"></i>Apellido </label>
+                <input type="text" id="Apellido" name="Apellido"  required>
+            </div>
+            <div class="form-group">
+                <label for="Celular"><i class="fa fa-envelope"></i> Celular </label>
+                <input type="text" id="Celular" name="Celular"  required>
+            </div>
+
+        </div>
+        <div class="form-row">
+             <h2>Gestión de comunas</h2>
+              <div class="form-group">
+                <label for="comuna">Comuna</label>
+                <select class="form-control" id="comuna" name="comuna" required>
+                    <option value="" selected disabled>Seleccione una comuna</option>
+
+                    {% for comunas in comuna %}
+                    <option value="{{comunas.id_comuna}}">{{comunas.nombre}}</option>
+                    {% endfor %}
+                </select>
+              </div>
+
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn">Guardar Cambios</button>
+        </div>
+    </form>
+
+{% endblock %}

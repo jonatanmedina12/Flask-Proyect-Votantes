@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Configuración del Perfil</h2>
+    <div class="profile-image-container">
+        <img src="{{ url_for('static', filename=user_foto_perfil) }}" width="100" class="profile-image rounded-circle mb-2" alt="Foto de perfil">
+    </div>
+    <form id="profile-form" method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nombre"><i class="fa fa-user"></i> Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="{{ Lider_user.nombres }}" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido"><i class="fa fa-user"></i> Apellido:</label>
+                <input type="text" id="apellido" name="apellido" value="{{ Lider_user.apellidos }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email"><i class="fa fa-envelope"></i> Correo Electrónico:</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="celular"><i class="fa fa-phone"></i> Teléfono:</label>
+                <input type="text" id="celular" name="celular" value="{{ Lider_user.celular }}" required>
+            </div>
+            <div class="form-group">
+                <label for="foto_perfil"><i class="fa fa-camera"></i> Foto de Perfil:</label>
+                <input type="file" id="foto_perfil" name="foto_perfil">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="new-password"><i class="fa fa-lock"></i> Nueva Contraseña:</label>
+                <input type="password" id="new-password" name="new-password">
+                <small>La contraseña debe tener al menos 8 caracteres.</small>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password"><i class="fa fa-lock"></i> Confirmar Nueva Contraseña:</label>
+                <input type="password" id="confirm-password" name="confirm-password">
+            </div>
+
+        </div>
+        <div class="form-row">
+             <div class="form-group">
+                <label for="nacimiento"><i class="fa fa-calendar"></i> Fecha de Nacimiento:</label>
+                <input type="date" id="nacimiento" name="nacimiento" value="{{Lider_user.nacimiento}}">
+            </div>
+            <div class="form-group">
+                <label for="pais"><i class="fa fa-globe"></i> País:</label>
+                <input type="text" id="pais" name="pais" value="{{Lider_user.pais}}">
+            </div>
+            <div class="form-group">
+                <label for="ciudad"><i class="fa fa-globe"></i> Ciudad:</label>
+                <input type="text" id="ciudad" name="ciudad" value="{{Lider_user.ciudad}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group full-width">
+                <label for="direccion"><i class="fa fa-map-marker-alt"></i> Dirección:</label>
+                <input type="text" id="direccion" name="direccion" value="{{ Lider_user.direccion }}" placeholder="Calle">
+            </div>
+
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn">Guardar Cambios</button>
+        </div>
+        <div id="form-messages" class="form-messages"></div>
+    </form>
+</div>
+{% endblock %}

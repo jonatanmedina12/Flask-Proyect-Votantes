@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema de Información de Votantes{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash">
+              {{ message }}
+              <button class="close" onclick="this.parentElement.style.display='none';">&times;</button>
+            </div>
+          {% endfor %}
+        </div>
+        <!-- Clear flashed messages -->
+        {% set _ = get_flashed_messages() %}
+      {% endif %}
+    {% endwith %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {% if 'registrar' not in request.endpoint %}
+
+            <div class="icon-container">
+                <a href="{{ url_for('home.index_home') }}"><i class="fas fa-home"></i>Inicio</a>
+            </div>
+            {% else %}
+            <div class="icon-container">
+                <a href="{{ url_for('registrar.registrarVotantes') }}"><i class="fas fa-home"></i>Inicio</a>
+            </div>
+            {% block user%}
+            {% endblock %}
+        {% endif %}
+
+
+
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+    const userIcon = document.getElementById('user-icon');
+    const profileText = document.getElementById('profile-text');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    const userWrapper = document.querySelector('.user-wrapper');
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('hidden');
+        });
+    }
+
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    function toggleDropdown() {
+        dropdownContent.classList.toggle('show');
+    }
+
+    if (userIcon) {
+        userIcon.addEventListener('click', toggleDropdown);
+    }
+
+    if (profileText) {
+        profileText.addEventListener('click', toggleDropdown);
+    }
+
+    window.addEventListener('click', function(e) {
+        if (!userWrapper.contains(e.target)) {
+            if (dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+            }
+        }
+    });
+});
+
+</script>
+</body>
+</html>

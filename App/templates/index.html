@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Sistema de Información de Votantes</h1>
+    <p class="lead">Bienvenido al sistema de registro y administración de votantes de Colombia.</p>
+    <hr class="my-4">
+    <p>Inicie de sesión para navegar por el sistema.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}" role="button">Iniciar sesión</a>
+</div>
+{% endblock %}

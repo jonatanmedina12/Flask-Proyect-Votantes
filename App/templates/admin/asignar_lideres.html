@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Bienvenido a la Gestión de Líderes - Utilice el menú para gestionar y asignar
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/asignarlideres.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h2>Bienvenido a la Gestión de Líderes - Utilice el menú para gestionar y asignar</h2>
+
+    <form id="profile-form" method="POST">
+        <div class="form-group">
+            <label for="lider">Líder</label>
+            <select class="form-control" id="lider" name="lider" required>
+                <option value="" selected disabled>Seleccione un líder</option>
+                {% for lideres in lider %}
+                    <option value="{{ lideres.id_lider }}">{{ lideres.nombres }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="Capitan">Capitán</label>
+                <select class="form-control" id="Capitan" name="Capitan" required>
+                                    <option value="" selected disabled>Seleccione un líder</option>
+
+                    {% for capitan_comuna in capitan1 %}
+                        <option value="{{ capitan_comuna.CapitanComuna.id_capitancomuna }}">
+                            {{ capitan_comuna.Capitan.nombres }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="barrio">Comuna</label>
+                <select class="form-control" id="barrio" name="barrio" required>
+                    <option value="" selected disabled>Seleccione una Comuna</option>
+                    {% for barrios in barrio %}
+                        <option value="{{ barrios.id_barrio }}">{{ barrios.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Guardar Cambios</button>
+        </div>
+    </form>
+{% endblock %}
