@@ -21,7 +21,7 @@ services:
       - DB_PASSWORD=123456**
       - FLASK_RUN_HOST=0.0.0.0
       - FLASK_RUN_PORT=5001
-      - GOOGLE_MAPS_API_KEY=AIzaSyDRc_aocLCdwLlvgT3TbLRiiFLyRqo6PkM
+      - GOOGLE_MAPS_API_KEY=0
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
